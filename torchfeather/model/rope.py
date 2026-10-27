@@ -61,7 +61,7 @@ def apply_rotary_emb(x: torch.Tensor, freqs_cis: torch.Tensor) ->  torch.Tensor:
     # freqs_cis: [S, D/2]
     dtype = x.dtype
     x = torch.view_as_complex(x.float().view(*x.shape[:-1], -1, 2)) # => [B, S, H, D / 2]
-    freqs_cis = freqs_cis.view(1, x.size(1), 1, x.size(-1)) # => [1, S, 1, D / 2]
+    freqs_cis = freqs_cis[: x.size(1)].view(1, x.size(1), 1, x.size(-1)) # => [1, S, 1, D / 2]
     y = torch.view_as_real(x * freqs_cis).flatten(3) 
     return y.to(dtype) 
 
