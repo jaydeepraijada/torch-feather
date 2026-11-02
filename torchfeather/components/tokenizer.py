@@ -7,10 +7,7 @@ from tokenizers import Tokenizer
 
 
 class DeepSeekV3Tokenizer:
-    def __init__(
-        self,
-        tokenizer_path: str,
-    ):
+    def __init__(self, tokenizer_path: str):
         super().__init__()
         self.tokenizer_path = tokenizer_path
 
@@ -68,8 +65,7 @@ class DeepSeekV3Tokenizer:
         self.default_add_eos = bool(config_add_eos)
 
     def encode(
-        self, text: str, add_bos: bool | None = None, add_eos: bool | None = None
-    ) -> list[int]:
+        self, text: str, add_bos: bool | None = None, add_eos: bool | None = None) -> list[int]:
         add_bos = self.default_add_bos if add_bos is None else add_bos
         add_eos = self.default_add_eos if add_eos is None else add_eos
 
